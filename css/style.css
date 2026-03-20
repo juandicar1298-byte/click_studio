@@ -3,3 +3,417 @@
     margin: 0;
     padding: 0;
 }
+
+.hero-click {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 700px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    background: var(--black, #0d0c0b);
+}
+
+/* ---------- Background Image ---------- */
+.hero-click__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.hero-click__bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+    filter: grayscale(100%) contrast(0.88) brightness(0.6);
+    animation: hc-bg-reveal 2.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+
+@keyframes hc-bg-reveal {
+    0%   { opacity: 0; transform: scale(1.1);  filter: grayscale(100%) brightness(0.3); }
+    100% { opacity: 1; transform: scale(1);    filter: grayscale(100%) contrast(0.88) brightness(0.6); }
+}
+
+/* ---------- Overlays ---------- */
+.hero-click__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+        linear-gradient(to right,
+            rgba(13,12,11,0.92) 0%,
+            rgba(13,12,11,0.55) 55%,
+            rgba(13,12,11,0.15) 100%),
+        linear-gradient(to top,
+            rgba(13,12,11,0.98) 0%,
+            rgba(13,12,11,0.3) 45%,
+            transparent 75%);
+    animation: hc-overlay-fade 1.8s ease 0.4s both;
+}
+
+@keyframes hc-overlay-fade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Noise grain texture */
+.hero-click__grain {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 180px;
+    pointer-events: none;
+}
+
+/* ---------- Geometric decorations ---------- */
+.hero-click__geo {
+    position: absolute;
+    pointer-events: none;
+    z-index: 3;
+}
+
+/* Long diagonal rule — top left */
+.hero-click__geo--rule-a {
+    top: 18%;
+    left: 7%;
+    width: 140px;
+    height: 1px;
+    background: linear-gradient(to right, rgba(200,196,188,0.35), transparent);
+    transform: rotate(-38deg);
+    transform-origin: left center;
+    animation: hc-line-grow 1.4s cubic-bezier(0.16,1,0.3,1) 1.6s both;
+}
+
+/* Short rule */
+.hero-click__geo--rule-b {
+    top: 38%;
+    left: 3.5%;
+    width: 65px;
+    height: 1px;
+    background: rgba(200,196,188,0.18);
+    transform: rotate(-38deg);
+    transform-origin: left center;
+    animation: hc-line-grow 1s cubic-bezier(0.16,1,0.3,1) 2s both;
+}
+
+@keyframes hc-line-grow {
+    from { transform: rotate(-38deg) scaleX(0); opacity: 0; }
+    to   { transform: rotate(-38deg) scaleX(1); opacity: 1; }
+}
+
+/* Dot grid — top right */
+.hero-click__geo--dots {
+    top: 6%;
+    right: 7%;
+    width: 110px;
+    height: 55px;
+    background-image: radial-gradient(circle, rgba(200,196,188,0.4) 1.5px, transparent 1.5px);
+    background-size: 15px 15px;
+    animation: hc-geo-in 1.5s ease 2.2s both;
+}
+
+/* Large ghost number */
+.hero-click__geo--num {
+    right: 3%;
+    bottom: 28%;
+    font-family: var(--font-display, 'Bebas Neue', sans-serif);
+    font-size: clamp(7rem, 14vw, 13rem);
+    color: rgba(200,196,188,0.035);
+    letter-spacing: -0.04em;
+    line-height: 1;
+    user-select: none;
+    animation: hc-geo-in 2s ease 1.8s both;
+}
+
+/* Corner bracket — bottom right area */
+.hero-click__geo--bracket {
+    right: 4.5%;
+    top: 12%;
+    width: 28px;
+    height: 28px;
+    border-top: 1px solid rgba(200,196,188,0.22);
+    border-right: 1px solid rgba(200,196,188,0.22);
+    animation: hc-geo-in 1s ease 2.4s both;
+}
+
+@keyframes hc-geo-in {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Ambient glow blob */
+.hero-click::before {
+    content: '';
+    position: absolute;
+    top: 22%;
+    right: 18%;
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(circle, rgba(200,196,188,0.05) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 2;
+    animation: hc-blob-float 9s ease-in-out infinite;
+}
+
+@keyframes hc-blob-float {
+    0%,100% { transform: translate(0,0) scale(1); }
+    33%     { transform: translate(18px,-25px) scale(1.1); }
+    66%     { transform: translate(-12px,18px) scale(0.92); }
+}
+
+/* ---------- Content ---------- */
+.hero-click__content {
+    position: relative;
+    z-index: 10;
+    padding: 0 4rem 6rem;
+    max-width: 960px;
+}
+
+/* Eyebrow tag */
+.hero-click__eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2.2rem;
+    animation: hc-from-left 0.9s cubic-bezier(0.16,1,0.3,1) 1.2s both;
+}
+
+@keyframes hc-from-left {
+    from { opacity: 0; transform: translateX(-24px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+.hero-click__eyebrow-line {
+    display: block;
+    width: 38px;
+    height: 1px;
+    background: rgba(200,196,188,0.55);
+}
+
+.hero-click__eyebrow-text {
+    font-family: var(--font-body, 'Montserrat', sans-serif);
+    font-size: 0.68rem;
+    font-weight: 300;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(200,196,188,0.65);
+}
+
+/* Brand name — three stacked lines */
+.hero-click__title {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 2.2rem;
+    overflow: hidden;
+}
+
+.hero-click__line {
+    display: block;
+    overflow: hidden;
+}
+
+/* "CLICK" */
+.hero-click__line--a {
+    font-family: var(--font-display, 'Bebas Neue', sans-serif);
+    font-size: clamp(4.5rem, 10vw, 10.5rem);
+    line-height: 0.88;
+    letter-spacing: 0.06em;
+    color: #f5f3f0;
+    animation: hc-line-up 1s cubic-bezier(0.16,1,0.3,1) 1.4s both;
+}
+
+/* "STUDIO" — outlined italic serif */
+.hero-click__line--b {
+    font-family: var(--font-serif, 'Cormorant Garamond', serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(5rem, 11.5vw, 12rem);
+    line-height: 1.0;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(245,243,240,0.55);
+    letter-spacing: 0.03em;
+    margin-left: 0.6rem;
+    animation: hc-line-up 1s cubic-bezier(0.16,1,0.3,1) 1.65s both;
+}
+
+@keyframes hc-line-up {
+    from { opacity: 0; transform: translateY(65px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Tagline */
+.hero-click__tagline {
+    font-family: var(--font-body, 'Montserrat', sans-serif);
+    font-size: 0.7rem;
+    font-weight: 200;
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+    color: rgba(200,196,188,0.6);
+    margin-bottom: 3.2rem;
+    animation: hc-from-below 1s cubic-bezier(0.16,1,0.3,1) 2.1s both;
+}
+
+/* Stat strip */
+.hero-click__stats {
+    display: flex;
+    gap: 3rem;
+    margin-bottom: 3rem;
+    animation: hc-from-below 1s cubic-bezier(0.16,1,0.3,1) 2.25s both;
+}
+
+.hero-click__stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.hero-click__stat-num {
+    font-family: var(--font-display, 'Bebas Neue', sans-serif);
+    font-size: 2.2rem;
+    letter-spacing: 0.05em;
+    color: #f5f3f0;
+    line-height: 1;
+}
+
+.hero-click__stat-label {
+    font-family: var(--font-body, 'Montserrat', sans-serif);
+    font-size: 0.6rem;
+    font-weight: 300;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(200,196,188,0.5);
+}
+
+/* CTA group */
+.hero-click__cta {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    animation: hc-from-below 1s cubic-bezier(0.16,1,0.3,1) 2.5s both;
+}
+
+@keyframes hc-from-below {
+    from { opacity: 0; transform: translateY(25px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Primary button */
+.hero-click__btn-primary {
+    font-family: var(--font-body, 'Montserrat', sans-serif);
+    font-size: 0.68rem;
+    font-weight: 400;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #0d0c0b;
+    background: #f5f3f0;
+    padding: 1.1rem 2.6rem;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), color 0.3s ease;
+}
+
+.hero-click__btn-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #c8c4bc;
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+
+.hero-click__btn-primary:hover { transform: translateY(-2px); }
+.hero-click__btn-primary:hover::before { transform: translateX(0); }
+
+.hero-click__btn-primary span {
+    position: relative;
+    z-index: 1;
+}
+
+/* Ghost button */
+.hero-click__btn-ghost {
+    font-family: var(--font-body, 'Montserrat', sans-serif);
+    font-size: 0.68rem;
+    font-weight: 300;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: rgba(200,196,188,0.7);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    transition: color 0.3s ease, gap 0.3s ease, opacity 0.3s ease;
+    opacity: 0.85;
+}
+
+.hero-click__btn-ghost:hover {
+    color: #f5f3f0;
+    gap: 1.4rem;
+    opacity: 1;
+}
+
+.hero-click__arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.hero-click__btn-ghost:hover .hero-click__arrow {
+    transform: translateX(5px);
+}
+
+/* ---------- Scroll indicator ---------- */
+.hero-click__scroll {
+    position: absolute;
+    right: 4rem;
+    bottom: 4rem;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    animation: hc-from-below 1s cubic-bezier(0.16,1,0.3,1) 3s both;
+}
+
+.hero-click__scroll-text {
+    font-family: var(--font-body, 'Montserrat', sans-serif);
+    font-size: 0.58rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(140,136,128,0.7);
+    writing-mode: vertical-rl;
+}
+
+.hero-click__scroll-line {
+    width: 1px;
+    height: 52px;
+    background: linear-gradient(to bottom, rgba(140,136,128,0.6), transparent);
+    animation: hc-scroll-pulse 2.2s ease-in-out infinite 3.5s;
+    transform-origin: top;
+}
+
+@keyframes hc-scroll-pulse {
+    0%, 100% { transform: scaleY(1); opacity: 1; }
+    50%       { transform: scaleY(0.35); opacity: 0.4; }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+    .hero-click__content {
+        padding: 0 2rem 5rem;
+    }
+
+    .hero-click__line--a { font-size: clamp(3.5rem, 16vw, 5.5rem); }
+    .hero-click__line--b { font-size: clamp(4rem, 18vw, 6rem); }
+
+    .hero-click__stats   { gap: 2rem; }
+    .hero-click__cta     { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+    .hero-click__scroll  { right: 1.8rem; bottom: 2rem; }
+    .hero-click__geo--num { font-size: 6rem; }
+}
+
