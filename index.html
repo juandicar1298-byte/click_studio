@@ -1,88 +1,120 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Click Studio — Landing Page</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
-        <main>
-  <section class="hero-click" id="inicio">
 
-    <!-- Background image -->
-    <div class="hero-click__bg">
-        <img src="img/fondo.png" alt="Click Studio background" loading="eager">
+  <!-- ===== CABECERA PRINCIPAL ===== -->
+  <header id="cabecera" role="banner">
+    <div class="cabecera-interior">
+
+      <div class="cabecera-identidad">
+        <a href="#inicio" class="cabecera-nombre">CLICK STUDIO</a>
+        <span class="cabecera-separador" aria-hidden="true">|</span>
+        <span class="cabecera-rol">PROJECT DEVELOPERS</span>
+      </div>
+
+      <nav aria-label="Navegación principal">
+        <ul role="list">
+          <li><a href="#inicio">INICIO</a></li>
+          <li><a href="#sobre-nosotros">SOBRE NOSOTROS</a></li>
+          <li><a href="#formularios">FORMULARIOS</a></li>
+        </ul>
+      </nav>
+
     </div>
+  </header>
+  <!-- ===== FIN CABECERA ===== -->
 
-    <!-- Overlays -->
-    <div class="hero-click__overlay"></div>
-    <div class="hero-click__grain"></div>
 
-    <!-- Geometric decorations -->
-    <span class="hero-click__geo hero-click__geo--rule-a"></span>
-    <span class="hero-click__geo hero-click__geo--rule-b"></span>
-    <div  class="hero-click__geo hero-click__geo--dots"></div>
-    <div  class="hero-click__geo hero-click__geo--bracket"></div>
-    <span class="hero-click__geo hero-click__geo--num">01</span>
+  <main id="contenido-principal">
 
-    <!-- Main content -->
-    <div class="hero-click__content">
+    <!-- ===== SECCIÓN HERO ===== -->
+    <section class="hero-click" id="inicio" aria-labelledby="hero-titulo">
 
-        <!-- Eyebrow -->
-        <div class="hero-click__eyebrow">
-            <span class="hero-click__eyebrow-line"></span>
-            <span class="hero-click__eyebrow-text">Diseño Web · Conversión · Resultados</span>
-        </div>
+      <!-- Imagen de fondo -->
+      <figure class="hero-click__bg" aria-hidden="true">
+        <img src="img/fondo.png" alt="" loading="eager">
+      </figure>
 
-        <!-- Brand name -->
-        <h1 class="hero-click__title">
-            <span class="hero-click__line hero-click__line--a">CLICK</span>
-            <span class="hero-click__line hero-click__line--b">Studio</span>
+      <!-- Capas decorativas (aria-hidden porque son puramente visuales) -->
+      <div  class="hero-click__overlay" aria-hidden="true"></div>
+      <div  class="hero-click__grain"   aria-hidden="true"></div>
+
+      <!-- Geometría decorativa -->
+      <div aria-hidden="true">
+        <span class="hero-click__geo hero-click__geo--rule-a"></span>
+        <span class="hero-click__geo hero-click__geo--rule-b"></span>
+        <span class="hero-click__geo hero-click__geo--dots"></span>
+        <span class="hero-click__geo hero-click__geo--bracket"></span>
+        <span class="hero-click__geo hero-click__geo--num">01</span>
+      </div>
+
+      <!-- Contenido principal del hero -->
+      <div class="hero-click__content">
+
+        <!-- Eyebrow / supratítulo -->
+        <p class="hero-click__eyebrow" aria-hidden="true">
+          <span class="hero-click__eyebrow-line"></span>
+          <span class="hero-click__eyebrow-text">Diseño Web · Conversión · Resultados</span>
+        </p>
+
+        <!-- Título de marca -->
+        <h1 class="hero-click__title" id="hero-titulo">
+          <span class="hero-click__line hero-click__line--a">CLICK</span>
+          <span class="hero-click__line hero-click__line--b">Studio</span>
         </h1>
 
         <!-- Tagline -->
         <p class="hero-click__tagline">Landing pages que convierten visitantes en clientes</p>
 
-        <!-- Stats -->
-        <div class="hero-click__stats">
-            <div class="hero-click__stat">
-                <span class="hero-click__stat-num">+120</span>
-                <span class="hero-click__stat-label">Proyectos entregados</span>
-            </div>
-            <div class="hero-click__stat">
-                <span class="hero-click__stat-num">98%</span>
-                <span class="hero-click__stat-label">Clientes satisfechos</span>
-            </div>
-            <div class="hero-click__stat">
-                <span class="hero-click__stat-num">3×</span>
-                <span class="hero-click__stat-label">Más conversiones</span>
-            </div>
-        </div>
+        <!-- Estadísticas -->
+        <ul class="hero-click__stats" aria-label="Nuestros números">
+          <li class="hero-click__stat">
+            <span class="hero-click__stat-num">+120</span>
+            <span class="hero-click__stat-label">Proyectos entregados</span>
+          </li>
+          <li class="hero-click__stat">
+            <span class="hero-click__stat-num">98%</span>
+            <span class="hero-click__stat-label">Clientes satisfechos</span>
+          </li>
+          <li class="hero-click__stat">
+            <span class="hero-click__stat-num">3×</span>
+            <span class="hero-click__stat-label">Más conversiones</span>
+          </li>
+        </ul>
 
-        <!-- CTAs -->
+        <!-- Llamadas a la acción -->
         <div class="hero-click__cta">
-            <a href="#contacto" class="hero-click__btn-primary">
-                <span>Quiero mi pagina web</span>
-            </a>
-            <a href="#portafolio" class="hero-click__btn-ghost">
-                Ver portafolio
-                <span class="hero-click__arrow">→</span>
-            </a>
+          <a href="#contacto" class="hero-click__btn-primary">
+            <span>Quiero mi página web</span>
+          </a>
+          <a href="#portafolio" class="hero-click__btn-ghost">
+            Ver portafolio
+            <span class="hero-click__arrow" aria-hidden="true">→</span>
+          </a>
         </div>
 
-    </div>
+      </div>
+      <!-- Fin contenido hero -->
 
-    <!-- Scroll indicator -->
-    <div class="hero-click__scroll">
+      <!-- Indicador de scroll -->
+      <div class="hero-click__scroll" aria-hidden="true">
         <span class="hero-click__scroll-text">Scroll</span>
         <span class="hero-click__scroll-line"></span>
-    </div>
+      </div>
 
+    </section>
+    <!-- ===== FIN HERO ===== -->
 
+  </main>
 
-</section>
-
-</main>
 </body>
 </html>
